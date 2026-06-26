@@ -71,8 +71,8 @@ app.post("/chats", async  (req,res, next) => {
 //NEW-SHOW ROUTE 
 app.get("/chats/:id", async (req, res, next) => {
  let {id} = req.params;
- let chats = await Chat.findById(id);
- if(!chats) {
+ let chat = await Chat.findById(id);
+ if(!chat) {
     next(new ExpressError(404,"Chat not found"));
  }
  //console.log(chats);
@@ -132,7 +132,7 @@ let chat1 = new Chat({
     from:"neha",
     to:"priya",
     msg:"send me ur sheets",
-    created_at: new Date(),  
+    created_at: new Date(), 
 });
 
 chat1.save().then((res) => {

@@ -73,8 +73,10 @@ app.use((err,req,res,next) => {
  console.log("------------ERROR 502--------------"); 
  next(err);
 })
-
-
+ app.use((req,res)=> {
+    res.status(404).send("Page not found");
+ });
+ 
 //   
 app.listen(8080, () => {
     console.log("server listening to port 8080");
