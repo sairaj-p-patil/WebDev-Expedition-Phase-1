@@ -1,4 +1,3 @@
-# EXPLORING WEBDEV
 # 🌐 Exploring WebDev
 
 > A growing collection of web development projects, code snippets, and practical implementations covering modern frontend and backend technologies.
