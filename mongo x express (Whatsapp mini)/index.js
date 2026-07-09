@@ -41,16 +41,17 @@ app.get("/chats", async (req, res) => {
 
 
 
-//NEW ROUTE 
+//NEW ROUTE  
 app.get("/chats/new", (req,res) => {
-    throw new  ExpressError(404, "page not found");
+   // throw new  ExpressError(404, "page not found");
     res.render("new.ejs");
       
-})
+});
 
 //CREATE ROUTE 
-app.post("/chats", async  (req,res, next) => {
-    try {
+app.post("/chats",
+    
+    asyncWrap( async  (req,res, next) => {
             let{from, to, msg} = req.body;
     let newChat =new Chat({
         from: from,
@@ -60,27 +61,32 @@ app.post("/chats", async  (req,res, next) => {
     });
     await newChat.save();
     res.redirect("/chats");
-    }  catch(err) {
-        next(err);
-    }
+    }  
     
   
     
-});
+));
 
-//NEW-SHOW ROUTE 
-app.get("/chats/:id", async (req, res, next) => {
- let {id} = req.params;
- let chat = await Chat.findById(id);
- if(!chat) {
+
+function asyncWrap(fn) {
+     return function(req, res, next) {
+        fn(req, res, next).catch((err) => next(err));
+     };
+}
+
+/////////////////////NEW-SHOW ROUTE/////////////////////////// 
+app.get("/chats/:id", 
+    
+    asyncWrap( async (req, res, next) => {
+    let {id} = req.params;
+    let chat = await Chat.findById(id);
+    if(!chat) {
     next(new ExpressError(404,"Chat not found"));
  }
- //console.log(chats);
- res.render("edit.ejs",{chat});
+   res.render("edit.ejs",{chat});
+}));
 
-});
-
-//EDIT ROUTE 
+//////////////////////EDIT ROUTE///////////////////////// 
 app.get("/chats/:id/edit", async (req,res) => {
     
    try {
@@ -95,8 +101,9 @@ app.get("/chats/:id/edit", async (req,res) => {
 });
 
 //////////////UPDATE ROUTE ////////////////
-app.put("/chats/:id", async (req,res) => {
-    try {
+app.put("/chats/:id", 
+
+    asyncWrap( async (req,res) => {  
          let { id } = req.params;
      let { msg:newmsg } = req.body;
      let updatedchat = await Chat.findByIdAndUpdate(
@@ -106,21 +113,17 @@ app.put("/chats/:id", async (req,res) => {
      );
      console.log(updatedchat);
      res.redirect("/chats");
-    } catch (err){
-        next(err);
-    }
-});
+}));
  ////////////////DESTORY ROUTE //////////////////
-app.delete("/chats/:id", async (req,res) => {
-    try {
+app.delete("/chats/:id", 
+    
+    asyncWrap(async (req,res) => {
         let { id } = req.params;
       let deletechat= await Chat.findByIdAndDelete(id);
       console.log(deletechat);
       res.redirect("/chats");   
-    } catch(err) {
-        next(err);
-    }
-});
+    
+    }));
 
 
 app.get("/",(req,res) => {
@@ -139,11 +142,29 @@ chat1.save().then((res) => {
     console.log(res);
 })
 
+
+const handleValidationErr = (err) => {
+     console.log("Type a longer message");
+     console.dir(err.message);
+     return err;
+}
+
+
+
+app.use((err, req, res, next) => {
+    console.log(err.name);
+    if(err.name === "ValidationError"){
+      err =   handleValidationErr(err);
+    }
+    next(err);
+});
+
+
 //--------ERROR HANDLING MIDDLEWARE---------//
 app.use((err, req, res, next) => {
 let {status = 500, message = "some error occured"} = err;
 res.status(status).send(message);
-})
+});
 
 
 app.listen(8080, () => {
