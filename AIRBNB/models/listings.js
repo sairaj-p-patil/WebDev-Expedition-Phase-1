@@ -13,7 +13,6 @@ const listingSchema = new Schema({
   description: String,
 
   image: {
-   
     type: String,
 
     // default image if not provided
@@ -25,14 +24,13 @@ const listingSchema = new Schema({
       v === ""
         ? "https://img.freepik.com/free-photo/sunset-time-tropical-beach-sea-with-coconut-palm-tree_74190-1075.jpg"
         : v,
-  
-},
-  
+  },
+
   price: Number,
 
   location: String,
   country: String,
-  });
+});
 
 // create model (collection = listings)
 const Listing = mongoose.model("Listing", listingSchema);

@@ -149,3 +149,9 @@ margin-bottom: 2rem;
 .delete-btn {
     white-space: nowrap; 
 }
+
+.btn-add {
+    width: 6rem !important;
+     margin-bottom: 1.5rem !important;
+    margin-left: 0.7rem !important;
+}
