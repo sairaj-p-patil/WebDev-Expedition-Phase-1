@@ -1,4 +1,4 @@
-# 🌐 WebDev-Expedition
+# 🌐 WebDev-Expedition-Phase-1
 
 > A growing collection of web development projects, code snippets, and practical implementations covering modern frontend and backend technologies.
 
@@ -18,7 +18,7 @@
 
 ## 📖 About
 
-**WebDev-Expedition** is an open-source repository dedicated to learning and practicing modern web development through real-world projects.
+**WebDev-Expedition-Phase-1** is an open-source repository dedicated to learning and practicing modern web development through real-world projects.
 
 It serves as a central place for:
 
@@ -70,14 +70,8 @@ It serves as a central place for:
 - Share knowledge with the developer community
 
 ---
+## Its My journey of completing Web Development Phase 1
 
-## 🤝 Contributing
-
-Contributions are welcome!
-
-If you'd like to improve a project, fix bugs, or add new ideas, feel free to fork the repository, open an issue, or submit a pull request.
-
----
 
 ## ⭐ Support
 
