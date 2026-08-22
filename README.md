@@ -15,7 +15,7 @@
 </p>
 
 ---
-<b> <i> Note: The Commits are Low on this repo Beacause commits replace my new ones duce to accident pushing the code with "git push -u origin main --force" command </i> <b/>
+<p> <b> <i> Note: The Commits are Low on this repo Beacause commits replace my new ones duce to accident pushing the code with "git push -u origin main --force" command </i> <b/> </p>
 ---
 ## 📖 About
 
